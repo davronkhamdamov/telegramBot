@@ -1,15 +1,38 @@
 const {bot} = require('../core/bot')
-const {Composer} = require("telegraf");
-const {messages} = require("../lib/message");
+const {Composer, Markup} = require("telegraf");
 const composer = new Composer()
 
 composer.start(ctx => {
-    ctx.replyWithHTML(messages['start'])
+    ctx.reply(`Xurmatli ${ctx.from.first_name} bizning botimizga xush kelibsiz`, {
+        reply_markup: {
+            keyboard: [
+                [
+                    {
+                        text:"Ro'yxatdan o'tish"
+                    },
+                    {
+                        text:"Adminga yozish ❓"
+                    }
+                ]
+            ],
+            resize_keyboard: true
+        }
+    })
 })
-composer.action('help', ctx => {
-    const data = ctx.update.callback_query.message
-    ctx.telegram.editMessageText(data.chat.id, data.message_id, '', 'Hello').then()
+composer.hears('Ro\'yxatdan o\'tish',ctx=>{
+    ctx.reply('Ro\'yxatdan o\'tish uchun telefon raqamingizni jo\'nating 📤',{
+        reply_markup:{
+            keyboard: [
+                [
+                    {
+                        text: 'Telefon raqamni jo\'natish 📱',
+                        request_contact: true
+                    }
+                ]
+            ],
+            resize_keyboard: true,
+        }
+    })
 })
-
 
 bot.use(composer.middleware())
