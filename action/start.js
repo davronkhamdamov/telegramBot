@@ -1,9 +1,9 @@
 const {bot} = require('../core/bot')
 const {Composer, Markup} = require("telegraf");
 const composer = new Composer()
-
-composer.start(ctx => {
-    ctx.reply(`Xurmatli ${ctx.from.first_name} bizning botimizga xush kelibsiz`, {
+const {User} = require('../db/user')
+composer.start(async ctx => {
+  await  ctx.reply(`Xurmatli ${ctx.from.first_name} bizning botimizga xush kelibsiz`, {
         reply_markup: {
             keyboard: [
                 [
@@ -18,9 +18,10 @@ composer.start(ctx => {
             resize_keyboard: true
         }
     })
+    const user = new User({})
 })
-composer.hears('Ro\'yxatdan o\'tish',ctx=>{
-    ctx.reply('Ro\'yxatdan o\'tish uchun telefon raqamingizni jo\'nating 📤',{
+composer.hears('Ro\'yxatdan o\'tish',async ctx=>{
+   await ctx.reply('Ro\'yxatdan o\'tish uchun telefon raqamingizni jo\'nating 📤',{
         reply_markup:{
             keyboard: [
                 [

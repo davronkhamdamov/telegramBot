@@ -1,8 +1,7 @@
 const {bot} = require('../core/bot')
-const {Composer} = require('telegraf')
 
-const isUserActive = (ctx) => {
-    ctx.reply('Bizning botimizga xush kelibsiz', {
+const isUserActive = async (ctx) => {
+   await ctx.reply('Bizning botimizga xush kelibsiz', {
         reply_markup: {
             keyboard: [
                 [
@@ -16,7 +15,8 @@ const isUserActive = (ctx) => {
                     }
                 ]
             ],
-            resize_keyboard: true
+            resize_keyboard: true,
+            one_time_keyboard: true
         }
     })
 }
