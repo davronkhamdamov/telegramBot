@@ -1,5 +1,6 @@
+const { channel } = require('../config')
 const { bot } = require('../core/bot')
-const { isUserActive } = require('./home')
+const { keyboard } = require('../lib/keyboard')
 
 bot.hears('O\'qituvchiga savol berish 👨‍💼️', async ctx => {
     ctx.reply('Qanaqa savolingiz bo\'lsa bemalol so\'rayvering men savolingizni o\'qituvchiga yetkazib qo\'yaman', {
@@ -10,10 +11,9 @@ bot.hears('O\'qituvchiga savol berish 👨‍💼️', async ctx => {
             resize_keyboard: true
         }
     })
-    bot.hears('🏘 Bosh sahifaga qaytish', ctx => {
-        isUserActive(ctx)
-    })
+
     bot.on('text', ctx => {
-        ctx.replyWithHTML("Savolingiz qabul qilindi tez olada javob olasiz")
+        ctx.telegram.sendMessage(channel, `Savol tomonidan yo\'llandi: @${ctx.from.username}\n\nSavol:\n${ctx.message.text}`)
+        ctx.replyWithHTML("Savolingiz qabul qilindi tez olada javob olasiz", keyboard)
     })
 })
