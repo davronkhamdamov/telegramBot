@@ -13,7 +13,7 @@ bot.hears('O\'qituvchiga savol berish 👨‍💼️', async ctx => {
     })
 
     bot.on('text', ctx => {
-        ctx.telegram.sendMessage(channel, `Savol tomonidan yo\'llandi: @${ctx.from.username}\n\nSavol:\n${ctx.message.text}`)
-        ctx.replyWithHTML("Savolingiz qabul qilindi tez olada javob olasiz", keyboard)
+        ctx.telegram.sendMessage(channel, `Savol @${ctx.from.username} tomonidan yo\'llandi \n\n\n${ctx.message.text}`)
+        ctx.replyWithHTML("Savolingiz qabul qilindi tez orada javob olasiz", keyboard)
     })
 })
